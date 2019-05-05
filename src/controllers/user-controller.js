@@ -1,9 +1,21 @@
+const User = require('../models/user')
+
 module.exports = {
-    getUsers(req, res){
-        res.send({users: 'des users'})
+    readAll(req, res) {
+        res.send({ users: 'des users' })
     },
 
-    getUser(req, res) {
-        res.send({user: 'user avec id ' + req.params.id})
+    readUser(req, res) {
+        res.send({ user: 'user avec id ' + req.params.id })
+    },
+
+    create(req, res) {
+        const {body} = req;
+        const user = new User({
+            name: body.name
+        });
+        user.save().then(() => {
+            res.send({result: 'user created: '+ user})
+        });
     }
 }
