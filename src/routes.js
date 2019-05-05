@@ -17,6 +17,8 @@ module.exports = (server) => {
 
     server.get('/youngest/users', UserController.youngest);
 
+    server.get('/hasLongestMovie/users', UserController.hasLongestMovie);
+
 
     // movies
 

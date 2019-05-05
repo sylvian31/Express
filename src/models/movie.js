@@ -9,4 +9,6 @@ const MovieSchema = new Schema({
 
 const Movie = mongoose.model('movie', MovieSchema);
 
+// const Movie = mongoose.model('movie', MovieSchema, "movies_collection"); // le dernier parametre permet de choiir le nom de la collection en custom sinon mongoose rajoutera un 's' 
+
 module.exports = Movie;
