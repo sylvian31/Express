@@ -1,21 +1,41 @@
 const User = require('../models/user')
+const Movie = require('../models/movie')
 
 module.exports = {
     readAll(req, res) {
-        res.send({ users: 'des users' })
+        User.find().then((users) => {
+            res.send(users)
+        });
     },
 
     readUser(req, res) {
-        res.send({ user: 'user avec id ' + req.params.id })
+        const {id} = req.params;
+        User.findById(id).then((user) => {
+            res.send(user)    
+        })
     },
 
     create(req, res) {
-        const {body} = req;
+        const {name, age} = req.body;
         const user = new User({
-            name: body.name
+            name,
+            age
         });
+        const movie = new Movie({title: "The lord of rings", duration: 150})
+        user.movies.push(movie);
         user.save().then(() => {
-            res.send({result: 'user created: '+ user})
+            movie.save().then(() => {
+                res.send({result: user})
+            })
         });
+    },
+
+    delete(req, res){
+        const {id} = req.body;
+        User.findByIdAndDelete(id).then((user) => {
+            res.send(user);
+        })
     }
+
+
 }
