@@ -13,6 +13,10 @@ module.exports = (server) => {
 
     server.delete('/users', UserController.delete);
 
+    server.get('/oldest/users', UserController.oldest);
+
+    server.get('/youngest/users', UserController.youngest);
+
 
     // movies
 
